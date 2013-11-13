@@ -29,7 +29,7 @@ class FlagAdmin(admin.ModelAdmin):
                     'staff', 'authenticated', 'languages')
     list_filter = ('everyone', 'superusers', 'staff', 'authenticated')
     inlines = (FlagUsersInline,)
-    raw_id_fields = ('groups')
+    raw_id_fields = ('groups',)
     ordering = ('-id',)
 
 
