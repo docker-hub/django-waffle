@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from waffle.models import Flag, Sample, Switch
+from waffle.models import Flag, FlagUsers, Sample, Switch
 
 
 def enable_for_all(ma, request, qs):
@@ -18,6 +18,9 @@ def disable_for_all(ma, request, qs):
         f.save()
 disable_for_all.short_description = 'Disable selected flags for everyone.'
 
+class FlagUsersInline(admin.TabularInline):
+    model = FlagUsers
+    extra = 1
 
 class FlagAdmin(admin.ModelAdmin):
     actions = [enable_for_all, disable_for_all]
@@ -25,7 +28,8 @@ class FlagAdmin(admin.ModelAdmin):
     list_display = ('name', 'note', 'everyone', 'percent', 'superusers',
                     'staff', 'authenticated', 'languages')
     list_filter = ('everyone', 'superusers', 'staff', 'authenticated')
-    raw_id_fields = ('users', 'groups')
+    inlines = (FlagUsersInline,)
+    raw_id_fields = ('groups')
     ordering = ('-id',)
 
 
