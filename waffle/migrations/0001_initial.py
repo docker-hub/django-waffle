@@ -34,7 +34,7 @@ class Migration(SchemaMigration):
         db.create_table('waffle_flag_users', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('flag', models.ForeignKey(orm['waffle.flag'], null=False)),
-            ('user', models.ForeignKey(AUTH_USER_MODEL, null=False))
+            ('user', models.ForeignKey(orm[AUTH_USER_MODEL], null=False))
         ))
         db.create_unique('waffle_flag_users', ['flag_id', 'user_id'])
 
