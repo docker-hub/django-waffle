@@ -63,6 +63,7 @@ class FlagUsers(models.Model):
     class Meta:
         db_table = 'waffle_flag_users'
 
+
 class Switch(models.Model):
     """A feature switch.
 

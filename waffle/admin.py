@@ -18,9 +18,11 @@ def disable_for_all(ma, request, qs):
         f.save()
 disable_for_all.short_description = 'Disable selected flags for everyone.'
 
+
 class FlagUsersInline(admin.TabularInline):
     model = FlagUsers
     extra = 1
+
 
 class FlagAdmin(admin.ModelAdmin):
     actions = [enable_for_all, disable_for_all]
