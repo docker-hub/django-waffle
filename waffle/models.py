@@ -37,8 +37,8 @@ class Flag(models.Model):
         'separated list)'))
     groups = models.ManyToManyField(Group, blank=True, help_text=(
         'Activate this flag for these user groups.'))
-    users = models.ManyToManyField(AUTH_USER_MODEL, blank=True, help_text=(
-        'Activate this flag for these users.'))
+    users = models.ManyToManyField(AUTH_USER_MODEL, blank=True,
+        through='FlagUsers', help_text=('Activate this flag for these users.'))
     rollout = models.BooleanField(default=False, help_text=(
         'Activate roll-out mode?'))
     note = models.TextField(blank=True, help_text=(
@@ -54,6 +54,11 @@ class Flag(models.Model):
     def save(self, *args, **kwargs):
         self.modified = datetime.now()
         super(Flag, self).save(*args, **kwargs)
+
+
+class FlagUsers(models.Model):
+    flag = models.ForeignKey(Flag)
+    user = models.ForeignKey(AUTH_USER_MODEL, db_column="user_id")
 
 
 class Switch(models.Model):
