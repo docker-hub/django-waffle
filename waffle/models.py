@@ -60,6 +60,8 @@ class FlagUsers(models.Model):
     flag = models.ForeignKey(Flag)
     user = models.ForeignKey(AUTH_USER_MODEL, db_column="user_id")
 
+    class Meta:
+        db_table = 'waffle_flag_users'
 
 class Switch(models.Model):
     """A feature switch.
