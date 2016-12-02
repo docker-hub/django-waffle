@@ -2,13 +2,15 @@
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
+from django.contrib.auth import get_user_model
 from django.db import models
-from waffle.compat import User
+
+User = get_user_model()
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding model 'Flag'
         db.create_table('waffle_flag', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -48,7 +50,7 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        
+
         # Deleting model 'Flag'
         db.delete_table('waffle_flag')
 
